@@ -2,33 +2,19 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import {
   View,
-  Dimensions,
-  TouchableOpacity,
-  ScrollView,
-  ImagedCarouselCard,
   ImageBackground,
 } from "react-native";
-import { Avatar, Button, Card, Surface, Text, List } from "react-native-paper";
-import { StyleSheet, SafeAreaView } from "react-native-safe-area-context";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useNavigation } from "@react-navigation/core";
-import { ActivityIndicator, FlatList } from "react-native-paper";
-
-import DrinksScreen from "./DrinksScreen";
-
+import { Text, List } from "react-native-paper";
+import { ActivityIndicator} from "react-native-paper";
 import CafeBar from "../../img/patrick-tomasso-GXXYkSwndP4-unsplash.jpg"
-import HotDrinks from "../../img/nathan-dumlao-pMW4jzELQCw-unsplash.png";
-import ColdDrinks from "../../img/jay-wennington-N_Y88TWmGwA-unsplash.png";
-import SoftDrinks from "../../img/valentin-bonjour-TIdqm0Cl8UA-unsplash.png";
-import Saefte from "../../img/douglas-alves-6jdn7bNSJF4-unsplash.png";
-import SnacksSweet from "../../img/tyler-nix-2rZq49uGxLk-unsplash.png";
-
 
 const Drinks = ({route, navigation}) => {
   const { itemId } = route.params;
+  const { itemNameID } = route.params;
   const { itemName } = route.params;
+  const name = itemName
   const id = JSON.stringify(itemId)
-  const nameID = itemName
+  const nameID = itemNameID
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState();
@@ -37,7 +23,6 @@ const Drinks = ({route, navigation}) => {
     try {
       const response = await fetch(url+name);
       const json = await response.json();
-      /* console.log(json) */
       setData(json)
     }
     catch (error) {
@@ -49,19 +34,13 @@ const Drinks = ({route, navigation}) => {
   }
   
   const whichData = (id, nameID) => {
-    const url = "http://127.0.0.1:5000/api/v1/ba/"
+    const url = "https://ba.0bdd.de/api/v1/ba/"
     console.log(url+nameID)
-
     getDrinks(url, nameID)
-
-
-
   }
 
   useEffect(() => {
     whichData(id, nameID)
-    /* getDrinks();
-    console.log(data) */
   }, []);
 
 
@@ -78,7 +57,17 @@ const Drinks = ({route, navigation}) => {
           style={{
             height:200
           }}>
-          
+          <View
+            style= {{
+              position:"absolute",
+              bottom:0,
+              width:"100%",
+              justifyContent:"center",
+              height:50,
+              backgroundColor:"rgba(0,0,0,0.8)",
+            }}>
+            <Text style={{color:"white", paddingLeft:15, fontSize:26 }}>{name}</Text>
+          </View>
         </View>
       </ImageBackground>
       <View style={{paddingTop:20}}>
@@ -88,11 +77,12 @@ const Drinks = ({route, navigation}) => {
         data.map((item, i) => {
           return (
             <View>
-              <List.Item
+              <List.Item 
+                key={item.id}
                 titleStyle={{color:"white"}}
                 title={item.name}
                 description={item.description}
-                right={()=>(<Text style={{color:"white"}}>{item.price}</Text>)}
+                right={()=>(<Text style={{color:"white"}} >{item.price}</Text>)}
                 />
             </View>
           )

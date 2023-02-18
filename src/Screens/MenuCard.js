@@ -4,44 +4,29 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
-  ImagedCarouselCard,
   ImageBackground,
 } from "react-native";
-import { Avatar, Button, Card, Surface, Text } from "react-native-paper";
-import { StyleSheet, SafeAreaView } from "react-native-safe-area-context";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useNavigation } from "@react-navigation/core";
-
+import { Avatar, Text } from "react-native-paper";
 import DrinksScreen from "./DrinksScreen";
-
 import CafeBar from "../../img/patrick-tomasso-GXXYkSwndP4-unsplash.jpg"
 import HotDrinks from "../../img/nathan-dumlao-pMW4jzELQCw-unsplash.png";
 import ColdDrinks from "../../img/jay-wennington-N_Y88TWmGwA-unsplash.png";
 import SoftDrinks from "../../img/valentin-bonjour-TIdqm0Cl8UA-unsplash.png";
 import Saefte from "../../img/douglas-alves-6jdn7bNSJF4-unsplash.png";
 import SnacksSweet from "../../img/tyler-nix-2rZq49uGxLk-unsplash.png";
-
-const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
+import HotChoco from "../../img/jonny-caspari-sWvPvEVygkU-unsplash.png"
 
 const MenuCard = ( {navigation}) => {
 
   const subjects = [
     { id: 1, name: "Heißgetränke", image: HotDrinks, nameID: "hotdrinks"},
-    { id: 2, name: "Eiskaltes", image: ColdDrinks, nameID: "icecold"},
-    { id: 3, name: "Softdrinks", image: SoftDrinks, nameID: "softdrinks"},
-    { id: 4, name: "Säfte", image: Saefte, nameID: "juice"},
-    { id: 5, name: "Snacks süß", image: SnacksSweet, nameID: "hotdrinks"},
-    { id: 6, name: "Heiße Schoko", image: HotDrinks, nameID: "hotchocolate"},
-    { id: 7, name: "Card 4", image: HotDrinks, nameID: "hotdrinks"},
-    { id: 8, name: "Card 4", image: HotDrinks, nameID: "hotdrinks"},
-    { id: 9, name: "Card 4", image: HotDrinks, nameID: "hotdrinks"},
-    { id: 10, name: "Card 4", image: HotDrinks, nameID: "hotdrinks"},
-    { id: 11, name: "Card 4", image: HotDrinks, nameID: "hotdrinks"},
+    { id: 2, name: "Heiße Schoko", image: HotChoco, nameID: "hotchocolate"},
+    { id: 3, name: "Eiskaltes", image: ColdDrinks, nameID: "icecold"},
+    { id: 4, name: "Softdrinks", image: SoftDrinks, nameID: "softdrinks"},
+    { id: 5, name: "Säfte", image: Saefte, nameID: "juice"},
+    { id: 6, name: "Snacks süß", image: SnacksSweet, nameID: "hotdrinks"},
+    
   ];
-
-  const showDrinks = () => <DrinksScreen />;
-
-
   const cardGap = 16;
 
   const cardWidth = (Dimensions.get("window").width - cardGap * 3) / 2;
@@ -85,7 +70,7 @@ const MenuCard = ( {navigation}) => {
                   alignItems: "center",
                 }}
               >
-                <TouchableOpacity onPress={() => navigation.navigate('Drinks', {itemId:subject.id, itemName: subject.nameID})}>
+                <TouchableOpacity onPress={() => navigation.navigate('Drinks', {itemId:subject.id, itemNameID: subject.nameID, itemName: subject.name})}>
                   <ImageBackground source={subject.image}>
                     <View
                       key={subject.id}

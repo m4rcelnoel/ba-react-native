@@ -7,7 +7,6 @@ import {
   ImageBackground,
 } from "react-native";
 import { Avatar, Text } from "react-native-paper";
-import DrinksScreen from "./DrinksScreen";
 import CafeBar from "../../img/patrick-tomasso-GXXYkSwndP4-unsplash.jpg"
 import HotDrinks from "../../img/nathan-dumlao-pMW4jzELQCw-unsplash.png";
 import ColdDrinks from "../../img/jay-wennington-N_Y88TWmGwA-unsplash.png";
@@ -18,7 +17,8 @@ import HotChoco from "../../img/jonny-caspari-sWvPvEVygkU-unsplash.png"
 
 const MenuCard = ( {navigation}) => {
 
-  const subjects = [
+  // Array von Kategorien für die Getränkekarte
+  const subjects = [ 
     { id: 1, name: "Heißgetränke", image: HotDrinks, nameID: "hotdrinks"},
     { id: 2, name: "Heiße Schoko", image: HotChoco, nameID: "hotchocolate"},
     { id: 3, name: "Eiskaltes", image: ColdDrinks, nameID: "icecold"},
@@ -27,8 +27,9 @@ const MenuCard = ( {navigation}) => {
     { id: 6, name: "Snacks süß", image: SnacksSweet, nameID: "hotdrinks"},
     
   ];
+  // Abstand zwischen den Karten
   const cardGap = 16;
-
+  //Breite der Karten basierend auf der Bildschirmbreite
   const cardWidth = (Dimensions.get("window").width - cardGap * 3) / 2;
 
   return (

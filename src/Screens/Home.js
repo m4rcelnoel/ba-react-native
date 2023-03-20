@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Avatar } from "react-native-paper";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DrinksScreen from "./DrinksScreen";
 import MenuCard from "./MenuCard";
 
+// Erstellen einer Instanz des NativeStackNavigators
 const Stack = createNativeStackNavigator();
 
 const Home = () => {

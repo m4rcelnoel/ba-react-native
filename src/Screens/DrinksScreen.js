@@ -9,6 +9,7 @@ import { ActivityIndicator} from "react-native-paper";
 import CafeBar from "../../img/patrick-tomasso-GXXYkSwndP4-unsplash.jpg"
 
 const Drinks = ({route, navigation}) => {
+  // itemId, itemNameID, itemName aus den Route-Parametern
   const { itemId } = route.params;
   const { itemNameID } = route.params;
   const { itemName } = route.params;
@@ -16,9 +17,10 @@ const Drinks = ({route, navigation}) => {
   const id = JSON.stringify(itemId)
   const nameID = itemNameID
 
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState();
+  const [isLoading, setLoading] = useState(true); // Zustand, der anzeigt, ob dei Daten geladen werden
+  const [data, setData] = useState(); // Zustand für die Daten
 
+  // Funktion, die die Daten aus der API abruft.
   const getDrinks = async (url, name) => {
     try {
       const response = await fetch(url+name);
@@ -32,13 +34,14 @@ const Drinks = ({route, navigation}) => {
       setLoading(false);
     }
   }
-  
+  // Funktion, die entscheidet, welche Daten abgerufen werden sollen
   const whichData = (id, nameID) => {
     const url = "https://ba.0bdd.de/api/v1/ba/"
     console.log(url+nameID)
     getDrinks(url, nameID)
   }
 
+  // Daten beim Rendern der Komponente abrufen
   useEffect(() => {
     whichData(id, nameID)
   }, []);
@@ -89,7 +92,7 @@ const Drinks = ({route, navigation}) => {
         })
       )}
       </View>
-      </View>
+    </View>
   );
 };
 
